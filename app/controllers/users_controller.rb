@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.permit(:username, :password, :password_confirmation)
+    defaults = { admin: false }
+    params.permit(:username, :password, :password_confirmation, :admin).reverse_merge(defaults)
   end
 
   def record_not_found
