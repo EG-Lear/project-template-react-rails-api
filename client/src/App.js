@@ -16,7 +16,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar loggedIn={loggedIn}/>
+        <Navbar loggedIn={loggedIn} loginUser={loginUser}/>
         <Switch>
           <Route exact path='/' render={() => <Home loggedIn={loggedIn} loginUser={loginUser}/>}/>
           <Route exact path='/signup' render={() => <Signup />}/>
