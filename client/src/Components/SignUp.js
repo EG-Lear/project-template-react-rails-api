@@ -3,12 +3,15 @@ import React, { useState } from 'react'
 const SignUp = () => {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
+  const [passwordConfirmation, setPasswordConfirmation] = useState("")
 
   const handleChange = (event) => {
     if (event.target.id === 'U') {
       setUserName(event.target.value)
     } else if (event.target.id === 'P') {
       setPassword(event.target.value)
+    } else if (event.target.id === 'PC') {
+      setPasswordConfirmation(event.target.value)
     }
   }
 
@@ -33,11 +36,14 @@ const SignUp = () => {
     <div>
       <h2>Sign up time</h2>
       <form>
-      <label>Username: </label>
+        <label>Username: </label>
         <input id='U' value={userName} onChange={handleChange}></input>
         <br/>
         <label>Password: </label>
         <input id='P' value={password} onChange={handleChange}></input>
+        <br/>
+        <label>Confirm Password: </label>
+        <input id='PC' value={passwordConfirmation} onChange={handleChange}></input>
       </form>
     </div>
   )
