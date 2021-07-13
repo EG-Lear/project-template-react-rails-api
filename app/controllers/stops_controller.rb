@@ -1,0 +1,3 @@
+class StopsController < ApplicationController
+
+end
