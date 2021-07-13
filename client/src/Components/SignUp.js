@@ -19,10 +19,10 @@ const SignUp = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
     if (password === passwordConfirmation) {
-      fetch('http://localhost:3000/signup', {
+      fetch('/signup', {
         method: "POST",
         headers: {
-          "Content-Type": "text/plain"
+          "Content-Type": "application/json"
         },
         body: JSON.stringify({
           username: userName, 
