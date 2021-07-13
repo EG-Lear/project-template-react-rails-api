@@ -4,7 +4,7 @@ const Trip = () => {
 
   return(
     <div>
-      
+
     </div>
   )
 }

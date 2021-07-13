@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Login from '../Components/Login'
 
-const Home = ({loggedIn, loginUser}) => {
+const Home = ({loggedIn, loginUser, user}) => {
  
   if (loggedIn === false) {
     return(
@@ -11,6 +11,12 @@ const Home = ({loggedIn, loginUser}) => {
         <Link to='/signup'>
           <button>Sign Up</button>
         </Link>
+      </div>
+    )
+  } else {
+    return (
+      <div>
+        <h2>Weclome {user}</h2>
       </div>
     )
   }
