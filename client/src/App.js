@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.css'
 import {BrowserRouter as Router, Route, Switch, useHistory} from 'react-router-dom'
 import Navbar from './Components/NavBar'
@@ -16,6 +16,10 @@ function App() {
     setUser(u)
     history.push('/')
   }
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <Router>

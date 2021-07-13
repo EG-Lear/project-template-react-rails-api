@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const SignUp = () => {
+const SignUp = ({loginUser}) => {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
   const [passwordConfirmation, setPasswordConfirmation] = useState("")
@@ -32,7 +32,7 @@ const SignUp = () => {
       })
       .then(res => res.json())
       .then(data => 
-        console.log(data)
+        loginUser(data.username)
       )
     } else {
       alert("Passwords do not match")
