@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :trips, only: [:show]
+  resources :trips, only: [:show, :index]
   resources :users, only: [:show]
   resources :recommendations, only: [:show]
   resources :stops, only: [:show]

@@ -5,7 +5,6 @@ import Login from '../Containers/Login'
 const Home = ({loggedIn, loginUser, user}) => {
  
   if (loggedIn === false) {
-    console.log("IN false")
     return(
       <div>
         <Login loginUser={loginUser}/>
@@ -15,7 +14,6 @@ const Home = ({loggedIn, loginUser, user}) => {
       </div>
     )
   } else if (loggedIn === true) {
-    console.log("IN true")
     return (
       <div>
         <h2>Weclome {user}</h2>

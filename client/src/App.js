@@ -15,7 +15,7 @@ function App() {
   const loginUser = (u) => {
     setLoggedIn(true)
     setUser(u)
-    // history.push('/')
+    history.push('/')
   }
   
   const logoutUser = () => {
@@ -26,7 +26,7 @@ function App() {
       setLoggedIn(false)
       setUser(null)
     })
-    // history.push('/')
+    history.push('/')
   }
 
   useEffect(() => {
@@ -44,17 +44,15 @@ function App() {
   }, [])
 
   return (
-    <Router>
-      <div className="App">
-        <Navbar loggedIn={loggedIn} logout={logoutUser}/>
-        <Switch>
-          <Route exact path='/' render={() => <Home loggedIn={loggedIn} loginUser={loginUser} user={user}/>}/>
-          <Route exact path='/signup' render={() => <Signup loginUser={loginUser}/>}/>
-          <Route exact path='/trip' render={() => <Trip />}/>
-          <Route />
-        </Switch>
-      </div>
-    </Router>
+    <div className="App">
+      <Navbar loggedIn={loggedIn} logout={logoutUser}/>
+      <Switch>
+        <Route exact path='/' render={() => <Home loggedIn={loggedIn} loginUser={loginUser} user={user}/>}/>
+        <Route exact path='/signup' render={() => <Signup loginUser={loginUser}/>}/>
+        <Route exact path='/trip' render={() => <Trip />}/>
+        <Route />
+      </Switch>
+    </div>
   )
 }
 
