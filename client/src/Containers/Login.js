@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Login = () => {
+const Login = ({loginUser}) => {
   const [userName, setUserName] = useState("")
   const [password, setPassword] = useState("")
 
@@ -25,9 +25,7 @@ const Login = () => {
       })
     })
     .then(res => res.json())
-    .then(data => 
-      console.log(data)
-    )
+    .then(data => loginUser(data.username))
   }
 
   return (

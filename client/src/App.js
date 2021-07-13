@@ -8,14 +8,14 @@ import Trip from './Containers/Trip'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
-  const [user, setUser] = useState('')
+  const [user, setUser] = useState(null)
   
   const history = useHistory()
   
   const loginUser = (u) => {
     setLoggedIn(true)
     setUser(u)
-    history.push('/')
+    // history.push('/')
   }
   
   const logoutUser = () => {
@@ -24,9 +24,9 @@ function App() {
     })
     .then(r => {
       setLoggedIn(false)
-      setUser('')
+      setUser(null)
     })
-    .then(history.push('/'))
+    // history.push('/')
   }
 
   useEffect(() => {
