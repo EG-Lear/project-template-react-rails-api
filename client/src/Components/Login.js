@@ -12,11 +12,12 @@ const Login = () => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
     fetch('http://localhost:3000/login', {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "text/plain"
       },
       body: JSON.stringify({
         username: userName, 

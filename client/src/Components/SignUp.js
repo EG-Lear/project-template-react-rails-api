@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const SignUp = () => {
   const [userName, setUserName] = useState("")
@@ -15,27 +16,32 @@ const SignUp = () => {
     }
   }
 
-  const handleSubmit = () => {
-    fetch('http://localhost:3000/login', {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        username: userName, 
-       password: password
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    if (password === passwordConfirmation) {
+      fetch('http://localhost:3000/signup', {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain"
+        },
+        body: JSON.stringify({
+          username: userName, 
+         password: password,
+         passwordConfirmation: passwordConfirmation
+        })
       })
-    })
-    .then(res => res.json())
-    .then(data => 
-      console.log(data)
-    )
+      .then(res => res.json())
+      .then(data => 
+        console.log(data)
+      )
+    } else {
+      alert("Passwords do not match")
+    }
   }
 
   return(
     <div>
-      <h2>Sign up time</h2>
-      <form>
+      <form onSubmit={handleSubmit}>
         <label>Username: </label>
         <input id='U' value={userName} onChange={handleChange}></input>
         <br/>
@@ -44,7 +50,13 @@ const SignUp = () => {
         <br/>
         <label>Confirm Password: </label>
         <input id='PC' value={passwordConfirmation} onChange={handleChange}></input>
+        <br/>
+        <br/>
+        <button>Sign up</button>
       </form>
+      <Link to='/'>
+        <button>Back</button>
+      </Link>
     </div>
   )
 }
