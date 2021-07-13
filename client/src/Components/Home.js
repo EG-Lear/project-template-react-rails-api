@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import Login from '../Components/Login'
+import Login from '../Containers/Login'
 
 const Home = ({loggedIn, loginUser, user}) => {
  

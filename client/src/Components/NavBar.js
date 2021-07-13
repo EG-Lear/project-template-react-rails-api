@@ -2,10 +2,9 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import '../App.css'
 
-const NavBar = ({loggedIn}) => {
-
+const NavBar = ({loggedIn, logout}) => {
   const handleClick = () => {
-    
+    logout()
   }
 
   if (loggedIn === false) {
@@ -21,7 +20,7 @@ const NavBar = ({loggedIn}) => {
         <img className="Resize"src='https://cdn.shopify.com/s/files/1/0010/4225/1812/products/Enamel_Globe-Trotter_01_Top-View.png?v=1603458946'/>
         <NavLink className='App-link' to='/'>Home</NavLink>
         <NavLink className='App-link' to='/trip'>Trips</NavLink>
-        <button onClick={handleClick}></button>
+        <button onClick={handleClick}>Log Out</button>
       </div>
     )
   }
