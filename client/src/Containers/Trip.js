@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from "react-router-dom";
 
 const Trip = () => {
   const [trips, setTrips] = useState([])
@@ -8,13 +9,13 @@ const Trip = () => {
     fetch('/trips')
     .then(res => res.json())
     .then(data => setTrips(data))
-  })
+  }, [])
 
   const handleRender = () => {
     console.log(trips)
     const tripLis = []
-    trips.map(trip => {
-      tripLis.push(<li>{trip.name}</li>)
+    trips.forEach(trip => {
+      tripLis.push(<li id={trip.id} className='Centered'>{trip.name} <Link to='/trip'></Link></li>)
     })
     return(tripLis)
   }

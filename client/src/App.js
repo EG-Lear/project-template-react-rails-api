@@ -5,6 +5,7 @@ import Navbar from './Components/NavBar'
 import Home from './Components/Home'
 import Signup from './Containers/SignUp'
 import Trip from './Containers/Trip'
+import SingleTrip from './Containers/SingleTrip'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -49,8 +50,8 @@ function App() {
       <Switch>
         <Route exact path='/' render={() => <Home loggedIn={loggedIn} loginUser={loginUser} user={user}/>}/>
         <Route exact path='/signup' render={() => <Signup loginUser={loginUser}/>}/>
-        <Route exact path='/trip' render={() => <Trip />}/>
-        <Route />
+        <Route exact path='/trips' render={() => <Trip />}/>
+        <Route exact path='/trips/:id' render={() => <SingleTrip />} />
       </Switch>
     </div>
   )
