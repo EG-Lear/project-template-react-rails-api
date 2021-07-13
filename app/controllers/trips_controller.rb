@@ -3,8 +3,9 @@ class TripsController < ApplicationController
   before_action :authorize
 
   def show
-    trip = User.find(session[:user_id]).Trip.find(id: params[:id])
-    render json: trip, include: :stops
+    # byebug
+    trip = User.find(session[:user_id]).trips.find(params[:id])
+    render json: trip
   end
   
   def index
@@ -22,7 +23,7 @@ class TripsController < ApplicationController
 
   def trip_params
     defaults = { user_id: session[:user_id] }
-    params.permit(:name, :user_id).reverse_merge(defaults)
+    params.permit(:name, :user_id, :id).reverse_merge(defaults)
   end
 
   def record_not_found
