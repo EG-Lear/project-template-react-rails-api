@@ -27,9 +27,14 @@ function App() {
     fetch('/logout', {
       method: 'DELETE'
     })
-    .then(r => {
-      setLoggedIn(false)
-      setUser(null)
+    .then(r => r.json())
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setLoggedIn(false)
+        setUser(null)
+      }
     })
     history.push('/')
   }
@@ -40,10 +45,13 @@ function App() {
       if (res.ok) {
         res.json()
         .then(u => {
-          console.log(u)
-          setLoggedIn(true)
-          setUser(u.username)
-          setAdmin(u.admin)
+          if (u.errors) {
+            alert(u.errors)
+          } else {
+            setLoggedIn(true)
+            setUser(u.username)
+            setAdmin(u.admin)
+          }
         })
       }
     })

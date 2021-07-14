@@ -25,7 +25,7 @@ class UsersController < ApplicationController
   end
 
   def record_not_found
-    render json: { error: "User not logged in" }, status: :unauthorized
+    render json: { errors: "User not logged in" }, status: :unauthorized
   end
   
 end

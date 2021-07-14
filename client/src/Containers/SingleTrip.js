@@ -14,7 +14,13 @@ const SingleTrip = () => {
   useEffect(() => {
     fetch(`/trips/${id}`)
     .then(res => res.json())
-    .then(data => setTrip(data))
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrip(data)
+      }
+    })
   }, [])
 
   const handleChange = (event) => {
@@ -46,7 +52,13 @@ const SingleTrip = () => {
       })
     })
     .then(res => res.json())
-    .then(data => setTrip(data))
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrip(data)
+      }
+    })
   }
 
   const handleRender = () => {
@@ -83,8 +95,11 @@ const SingleTrip = () => {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      setTrip(data)
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrip(data)
+      }
     })
   }
 

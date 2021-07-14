@@ -31,9 +31,13 @@ const SignUp = ({loginUser}) => {
         })
       })
       .then(res => res.json())
-      .then(data => 
-        loginUser(data.username, data.admin)
-      )
+      .then(data => {
+        if (data.errors) {
+          alert(data.errors)
+        } else {
+          loginUser(data.username, data.admin)
+        }
+      })
     } else {
       alert("Passwords do not match")
     }

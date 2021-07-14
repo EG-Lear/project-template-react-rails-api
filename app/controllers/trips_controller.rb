@@ -1,5 +1,6 @@
 class TripsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
   before_action :authorize
 
   def show
@@ -16,8 +17,12 @@ class TripsController < ApplicationController
 
   def create
     trip = Trip.create(trip_params)
-    trips = find_user.trips
-    render json: trips
+    if trip.valid?
+      trips = find_user.trips
+      render json: trips
+    else
+      render json: { errors: trip.errors.full_messages }
+    end
   end
 
   def destroy
@@ -39,10 +44,15 @@ class TripsController < ApplicationController
   end
 
   def record_not_found
-    render json: { error: "User not logged in" }, status: :unauthorized
+    render json: { errors: "User not logged in" }, status: :unauthorized
   end
 
   def authorize
-    return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
+    return render json: { errors: "Not authorized" }, status: :unauthorized unless session.include? :user_id
   end
+
+  def render_unprocessable_entity_response(invalid)
+    render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+  end
+
 end

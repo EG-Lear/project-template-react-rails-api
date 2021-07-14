@@ -8,7 +8,13 @@ const Trip = () => {
   useEffect(() => {
     fetch('/trips')
     .then(res => res.json())
-    .then(data => setTrips(data))
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrips(data)
+      }
+    })
   }, [])
 
   const handleRender = () => {
@@ -26,7 +32,13 @@ const Trip = () => {
       method: 'DELETE'
     })
     .then(res => res.json())
-    .then(data => setTrips(data))
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrips(data)
+      }
+    })
   }
 
   const handleSubmit = (event) => {
@@ -41,7 +53,14 @@ const Trip = () => {
       })
     })
     .then(res => res.json())
-    .then(data => setTrips(data))
+    .then(data => {
+      console.log(data)
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        setTrips(data)
+      }
+    })
   }
 
   const handleNewName = (event) => {
