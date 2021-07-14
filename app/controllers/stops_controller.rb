@@ -14,7 +14,7 @@ class StopsController < ApplicationController
     trip = find_trip
     # stops = Trip.find(stop_params[:trip_id]).stops
     if stop.valid?
-      render json: trip
+      render json: trip, status: :created
     else
       render json: { errors: stop.errors.full_messages }, status: :unprocessable_entity
     end

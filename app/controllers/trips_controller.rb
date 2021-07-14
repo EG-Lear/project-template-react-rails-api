@@ -19,7 +19,7 @@ class TripsController < ApplicationController
     trip = Trip.create(trip_params)
     if trip.valid?
       trips = find_user.trips
-      render json: trips
+      render json: trips, status: :created
     else
       render json: { errors: trip.errors.full_messages }
     end

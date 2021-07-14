@@ -114,7 +114,13 @@ const Recommendations = ({admin}) => {
       })
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      if (data.errors) {
+        alert(data.errors)
+      } else {
+        console.log(data)
+      }
+    })
   }
 
   const handleSelect = (event) => {

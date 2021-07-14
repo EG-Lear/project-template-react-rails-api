@@ -17,6 +17,7 @@ const Home = ({loggedIn, loginUser, user}) => {
     return (
       <div>
         <h2>Weclome {user}</h2>
+        <p>We thank you for choosing us to help plan your next trip around the globe.</p>
       </div>
     )
   }
