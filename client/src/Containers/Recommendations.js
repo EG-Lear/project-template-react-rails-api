@@ -82,7 +82,7 @@ const Recommendations = ({admin}) => {
           <br/>
           <button value={reco.id} onClick={handleClick}>Add to Trip</button>
           <select onChange={handleSelect}>
-            <option key={'none'} value={"none"}>Select a Trip</option>
+            <option key={'none'} id={"none"} value={"none"}>Select a Trip</option>
             {renderOptions()}
           </select>
           <label> Selected Trip: {selected}</label>
@@ -96,8 +96,10 @@ const Recommendations = ({admin}) => {
   }
 
   const handleClick = (event) => {
-    const nameSet = recommendations[event.target.value].name
-    const descripSet = recommendations[event.target.value].description  
+    console.log(selectId)
+    console.log(event.target)
+    const nameSet = recommendations[event.target.value - 1].name
+    const descripSet = recommendations[event.target.value - 1].description  
     fetch('/stops',{
       method: 'POST',
       headers: {
@@ -114,14 +116,15 @@ const Recommendations = ({admin}) => {
   }
 
   const handleSelect = (event) => {
-    setSelected(event.target.value)
-    console.log(event.target.id)
-    setSelectId(event.target.id)
+    const nameSet = trips[event.target.value - 1].name
+    setSelected(nameSet)
+    // console.log(event.target)
+    setSelectId(event.target.value)
   }
   
   const renderOptions = () => {
     const choices = []
-    trips.forEach(trip => choices.push(<option key={trip.id} id={trip.id} value={trip.name}>{trip.name}</option>))
+    trips.forEach(trip => choices.push(<option key={trip.id} value={trip.id}>{trip.name}</option>))
     return(choices)
   }
 
