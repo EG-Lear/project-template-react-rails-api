@@ -25,7 +25,7 @@ const Login = ({loginUser}) => {
       })
     })
     .then(res => res.json())
-    .then(data => loginUser(data.username))
+    .then(data => loginUser(data.username, data.admin))
   }
 
   return (

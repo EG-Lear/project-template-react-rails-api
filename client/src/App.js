@@ -15,9 +15,11 @@ function App() {
   
   const history = useHistory()
   
-  const loginUser = (u) => {
+  const loginUser = (u, a) => {
     setLoggedIn(true)
     setUser(u)
+    console.log(a)
+    setAdmin(a)
     history.push('/')
   }
   
@@ -41,6 +43,7 @@ function App() {
           console.log(u)
           setLoggedIn(true)
           setUser(u.username)
+          setAdmin(u.admin)
         })
       }
     })

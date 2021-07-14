@@ -1,3 +1,3 @@
 class RecommendationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :description, :image_url
 end

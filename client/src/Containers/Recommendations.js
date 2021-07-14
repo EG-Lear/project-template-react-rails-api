@@ -9,13 +9,16 @@ const Recommendations = ({admin}) => {
   useEffect(() => {
     fetch('/recommendations')
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => {
+      console.log(data)
+      setRecommendations(data)
+    })
   }, [])
 
   const renderForm = () => {
     if (admin === true) {
       return(
-        <form>
+        <form onSubmit={handleSubmit}>
           <h4>Create recommendation</h4>
           <label>Name: </label>
           <input id='N' value={nameNew} onChange={handleChange}></input>
@@ -26,13 +29,40 @@ const Recommendations = ({admin}) => {
           <label>Image Url: </label>
           <input id='I' value={imageUrlNew} onChange={handleChange}></input>
           <br/>
+          <button>Create</button>
         </form>
       )
     }
   }
 
-  const handleChange = () => {
+  const handleChange = (event) => {
+    if (event.target.id === 'N') {
+      setNameNew(event.target.value)
+    } else if (event.target.id === 'D') {
+      setDescriptionNew(event.target.value)
+    } else if (event.target.id === 'I') {
+      setImageUrlNew(event.target.value)
+    }
+  }
 
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    fetch('/recommendations',{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: nameNew,
+        description: descriptionNew,
+        image_url: imageUrlNew
+      }) 
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      setRecommendations(data)
+    })
   }
 
   return (

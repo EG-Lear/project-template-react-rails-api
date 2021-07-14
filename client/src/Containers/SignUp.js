@@ -32,7 +32,7 @@ const SignUp = ({loginUser}) => {
       })
       .then(res => res.json())
       .then(data => 
-        loginUser(data.username)
+        loginUser(data.username, data.admin)
       )
     } else {
       alert("Passwords do not match")

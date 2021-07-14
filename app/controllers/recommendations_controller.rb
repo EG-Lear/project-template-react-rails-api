@@ -7,7 +7,21 @@ class RecommendationsController < ApplicationController
     render json: recommendations
   end
 
+  def create
+    if is_admin
+      Recommendation.create(reco_params)
+      recommendations = Recommendation.all
+      render json: recommendations
+    else
+      render json: { errors: "Not authorized" }
+    end
+  end
+
   private
+
+  def reco_params
+    params.permit(:name, :description, :image_url)
+  end
 
   def record_not_found
     render json: { error: "User not logged in" }, status: :unauthorized
