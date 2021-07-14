@@ -5,6 +5,8 @@ const Recommendations = ({admin}) => {
   const [nameNew, setNameNew] = useState('')
   const [descriptionNew, setDescriptionNew] = useState('')
   const [imageUrlNew, setImageUrlNew] = useState('')
+  const [trips, setTrips] = useState([])
+  const [selected, setSelected] = useState('')
 
   useEffect(() => {
     fetch('/recommendations')
@@ -13,6 +15,9 @@ const Recommendations = ({admin}) => {
       console.log(data)
       setRecommendations(data)
     })
+    fetch('/trips')
+    .then(res => res.json())
+    .then(data => setTrips(data))
   }, [])
 
   const renderForm = () => {
@@ -44,7 +49,7 @@ const Recommendations = ({admin}) => {
       setImageUrlNew(event.target.value)
     }
   }
-
+  
   const handleSubmit = (event) => {
     event.preventDefault()
     fetch('/recommendations',{
@@ -64,7 +69,7 @@ const Recommendations = ({admin}) => {
       setRecommendations(data)
     })
   }
-
+  
   const renderRecommendations = () => {
     const lis = []
     recommendations.forEach(reco => {
@@ -75,6 +80,11 @@ const Recommendations = ({admin}) => {
           <img className='RecoPics' src={reco.image_url}/>
           <br/>
           <button>Add to Trip</button>
+          <select onChange={handleSelect}>
+            <option key={'none'} value={"none"}>Select a Trip</option>
+            {renderOptions()}
+          </select>
+          <label> Selected Trip: {selected}</label>
           <br/>
           <br/>
           <br/>
@@ -82,6 +92,16 @@ const Recommendations = ({admin}) => {
       )
     })
     return(lis)
+  }
+
+  const handleSelect = (event) => {
+    setSelected(event.target.value)
+  }
+  
+  const renderOptions = () => {
+    const choices = []
+    trips.forEach(trip => choices.push(<option key={trip.id} value={trip.name}>{trip.name}</option>))
+    return(choices)
   }
 
   return (
