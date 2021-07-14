@@ -65,9 +65,31 @@ const Recommendations = ({admin}) => {
     })
   }
 
+  const renderRecommendations = () => {
+    const lis = []
+    recommendations.forEach(reco => {
+      lis.push(
+        <li key={reco.id} className='Centered'>
+          <h4>{reco.name}</h4>
+          <p>{reco.description}</p>
+          <img className='RecoPics' src={reco.image_url}/>
+          <br/>
+          <button>Add to Trip</button>
+          <br/>
+          <br/>
+          <br/>
+        </li>
+      )
+    })
+    return(lis)
+  }
+
   return (
     <div>
       <h3>Recommended stops</h3>
+      <ul className='RecoList'>
+        {renderRecommendations()}
+      </ul>
       {renderForm()}
     </div>
   )

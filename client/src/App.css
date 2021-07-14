@@ -49,3 +49,12 @@
   display: inline-block;
   margin-right: 10px;
 }
+
+.RecoPics {
+  max-width: 40%;
+  max-height: 40%;
+}
+
+.RecoList{
+  list-style: none;
+}
