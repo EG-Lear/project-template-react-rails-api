@@ -1,3 +1,3 @@
 class StopSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :description, :extra_stop
 end

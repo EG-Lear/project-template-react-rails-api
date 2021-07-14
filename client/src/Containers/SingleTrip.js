@@ -12,7 +12,7 @@ const SingleTrip = () => {
     fetch(`/trips/${id}`)
     .then(res => res.json())
     .then(data => setTrip(data))
-  })
+  }, [])
 
   const handleChange = (event) => {
     if (event.target.id === 'S') {
@@ -24,7 +24,10 @@ const SingleTrip = () => {
     }
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    let idInt = parseInt(id, 10)
+    // console.log(idInt, '1')
     fetch('/stops', {
       method: "POST",
       headers: {
@@ -33,7 +36,8 @@ const SingleTrip = () => {
       body: JSON.stringify({
         name: stopName,
         description: description,
-        extraStop: extraStop
+        extra_stop: extraStop,
+        trip_id: idInt
       })
     })
     .then(res => res.json())
@@ -56,6 +60,8 @@ const SingleTrip = () => {
           <option value={false}>No</option>
           <option value={true}>Yes</option>
         </select>
+        <br/>
+        <button>add stop</button>
       </form>
     </div>
   )
