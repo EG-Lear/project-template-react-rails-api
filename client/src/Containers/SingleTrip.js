@@ -6,7 +6,10 @@ const SingleTrip = () => {
   const [stopName, setStopName] = useState('')
   const [description, setDescription] = useState('')
   const [extraStop, setExtraStop] = useState(false)
+  const [update, setUpdate] = useState('')
+  const [updateName, setUpdateName] = useState('')
   const { id } = useParams()
+  
 
   useEffect(() => {
     fetch(`/trips/${id}`)
@@ -21,13 +24,15 @@ const SingleTrip = () => {
       setDescription(event.target.value)
     } else if (event.target.id === 'SS') {
       setExtraStop(event.target.value)
+    } else if (event.target.id === 'U') {
+      setUpdate(event.target.value)
+    } else if (event.target.id === 'UN') {
+      setUpdateName(event.target.value)
     }
   }
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    let idInt = parseInt(id, 10)
-    // console.log(idInt, '1')
     fetch('/stops', {
       method: "POST",
       headers: {
@@ -37,7 +42,7 @@ const SingleTrip = () => {
         name: stopName,
         description: description,
         extra_stop: extraStop,
-        trip_id: idInt
+        trip_id: id
       })
     })
     .then(res => res.json())
@@ -62,6 +67,27 @@ const SingleTrip = () => {
     return(lis)
   }
 
+  const handleUpdate = (event) => {
+    event.preventDefault()
+    fetch(`/stops`, {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: updateName,
+        description: update,
+        extra_stop: extraStop,
+        trip_id: id
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      setTrip(data)
+    })
+  }
+
   const handleClick = (event) => {
     fetch(`/stops/${event.target.id}`, {
       method: 'DELETE',
@@ -84,12 +110,23 @@ const SingleTrip = () => {
 
   return(
     <div>
-      <h3>{trip.name}</h3>
+      <h2>{trip.name}</h2>
       <ul>
         {handleRender()}
       </ul>
+      <form onSubmit={handleUpdate}>
+        <h3>Update stop notes</h3>
+        <label>Stop name: </label>
+        <input id='UN' value={updateName} onChange={handleChange}></input>
+        <br/>
+        <label>update notes: </label>
+        <input id='U' value={update} onChange={handleChange}></input>
+        <br/>
+        <button>Update</button>
+        <br/>
+      </form>
       <form onSubmit={handleSubmit}>
-        <h4>Plan a stop</h4>
+        <h3>Plan a stop</h3>
         <label>Name: </label>
         <input id='S' value={stopName} onChange={handleChange}></input>
         <br/>
