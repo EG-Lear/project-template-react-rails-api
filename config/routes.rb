@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :trips, only: [:show, :index, :create] do
     resources :stops, only: [:index]
   end
-  resources :stops, only: [:create]
+  resources :stops, only: [:create, :destroy]
   resources :users, only: [:show]
   resources :recommendations, only: [:show]
   get "/me", to: "users#show"

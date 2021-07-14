@@ -32,7 +32,7 @@ const Trip = () => {
       })
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => setTrips(data))
   }
 
   const handleNewName = (event) => {

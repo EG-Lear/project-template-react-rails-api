@@ -19,6 +19,16 @@ class StopsController < ApplicationController
     end
   end
 
+  def destroy
+    if params[:id]
+      Stop.find(params[:id]).destroy
+      trip = Trip.find(params[:stop_id])
+      render json: trop, include: :stops
+    else
+      render json: { errors: "stop not found" }
+    end
+  end
+
   private
 
   def stop_params
