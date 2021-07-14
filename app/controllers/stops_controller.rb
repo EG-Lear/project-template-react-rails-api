@@ -10,9 +10,10 @@ class StopsController < ApplicationController
   def create
     # byebug
     stop = Stop.create(stop_params)
-    stops = Trip.find(stop_params[:trip_id]).stops
+    trip = Trip.find(stop_params[:trip_id])
+    # stops = Trip.find(stop_params[:trip_id]).stops
     if stop.valid?
-      render json: stops, include: :trip
+      render json: trip
     else
       render json: { errors: stop.errors.full_messages }, status: :unprocessable_entity
     end
