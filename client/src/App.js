@@ -6,6 +6,7 @@ import Home from './Components/Home'
 import Signup from './Containers/SignUp'
 import Trip from './Containers/Trip'
 import SingleTrip from './Containers/SingleTrip'
+import Recommendations from './Containers/Recommendations'
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
@@ -52,6 +53,7 @@ function App() {
         <Route exact path='/signup' render={() => <Signup loginUser={loginUser}/>}/>
         <Route exact path='/trips' render={() => <Trip />}/>
         <Route exact path='/trips/:id' render={() => <SingleTrip />} />
+        <Route exact path='/recommendations' render={() => <Recommendations />}/>
       </Switch>
     </div>
   )

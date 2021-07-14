@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :stops, only: [:create, :destroy]
   patch "/stops", to: "stops#update"
   resources :users, only: [:show]
-  resources :recommendations, only: [:show]
+  resources :recommendations, only: [:index]
   get "/me", to: "users#show"
   post "/signup", to: "users#create"
 
