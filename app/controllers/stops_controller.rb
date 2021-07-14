@@ -20,13 +20,10 @@ class StopsController < ApplicationController
   end
 
   def destroy
-    if params[:id]
-      Stop.find(params[:id]).destroy
-      trip = Trip.find(params[:stop_id])
-      render json: trop, include: :stops
-    else
-      render json: { errors: "stop not found" }
-    end
+    trip = Trip.find(params[:trip_id])
+    stop = Stop.find(params[:id])
+    stop.destroy
+    render json: trip, include: :stops
   end
 
   private

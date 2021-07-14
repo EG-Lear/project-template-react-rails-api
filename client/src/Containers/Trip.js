@@ -15,7 +15,7 @@ const Trip = () => {
     // console.log(trips)
     const tripLis = []
     trips.forEach(trip => {
-      tripLis.push(<li id={trip.id} className='Centered'>{trip.name} <Link to={`/trips/${trip.id}`}>View Trip</Link></li>)
+      tripLis.push(<li key={trip.id} id={trip.id} className='Centered'>{trip.name} <Link to={`/trips/${trip.id}`}>View Trip</Link></li>)
     })
     return(tripLis)
   }

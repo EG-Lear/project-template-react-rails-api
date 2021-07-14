@@ -50,7 +50,7 @@ const SingleTrip = () => {
       trip.stops.forEach(stop => {
         lis.push(
           <li key={stop.id} className='Centered'>
-            {stop.name} <button onClick={handleClick}>Delete</button>
+            {stop.name} <button id={stop.id} onClick={handleClick}>Delete</button>
             <br/>
             {stop.description}
             <br/>
@@ -63,12 +63,14 @@ const SingleTrip = () => {
   }
 
   const handleClick = (event) => {
-    event.preventDefault()
     fetch(`/stops/${event.target.id}`, {
       method: 'DELETE',
       headers: {
         "Content-Type": "application/json"
-      }
+      },
+      body: JSON.stringify({
+        trip_id: id
+      })
     })
     .then(res => res.json())
     .then(data => {
