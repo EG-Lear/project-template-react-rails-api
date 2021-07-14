@@ -41,12 +41,33 @@ const SingleTrip = () => {
       })
     })
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => setTrip(data))
+  }
+
+  const handleRender = () => {
+    const lis = []
+    if (trip.stops) {
+      trip.stops.forEach(stop => {
+        lis.push(
+          <li key={stop.id} className='Centered'>
+            {stop.name} <button>Delete</button>
+            <br/>
+            {stop.description}
+            <br/>
+            <br/>
+          </li>
+        )
+      })
+    }
+    return(lis)
   }
 
   return(
     <div>
       <h3>{trip.name}</h3>
+      <ul>
+        {handleRender()}
+      </ul>
       <form onSubmit={handleSubmit}>
         <h4>Plan a stop</h4>
         <label>Name: </label>
