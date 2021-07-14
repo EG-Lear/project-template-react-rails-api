@@ -7,6 +7,7 @@ const Recommendations = ({admin}) => {
   const [imageUrlNew, setImageUrlNew] = useState('')
   const [trips, setTrips] = useState([])
   const [selected, setSelected] = useState('')
+  const [selectId, setSelectId] = useState('')
 
   useEffect(() => {
     fetch('/recommendations')
@@ -79,7 +80,7 @@ const Recommendations = ({admin}) => {
           <p>{reco.description}</p>
           <img className='RecoPics' src={reco.image_url}/>
           <br/>
-          <button>Add to Trip</button>
+          <button value={reco.id} onClick={handleClick}>Add to Trip</button>
           <select onChange={handleSelect}>
             <option key={'none'} value={"none"}>Select a Trip</option>
             {renderOptions()}
@@ -94,13 +95,33 @@ const Recommendations = ({admin}) => {
     return(lis)
   }
 
+  const handleClick = (event) => {
+    const nameSet = recommendations[event.target.value].name
+    const descripSet = recommendations[event.target.value].description  
+    fetch('/stops',{
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        trip_id: selectId,
+        name: nameSet,
+        description: descripSet    
+      })
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+  }
+
   const handleSelect = (event) => {
     setSelected(event.target.value)
+    console.log(event.target.id)
+    setSelectId(event.target.id)
   }
   
   const renderOptions = () => {
     const choices = []
-    trips.forEach(trip => choices.push(<option key={trip.id} value={trip.name}>{trip.name}</option>))
+    trips.forEach(trip => choices.push(<option key={trip.id} id={trip.id} value={trip.name}>{trip.name}</option>))
     return(choices)
   }
 
