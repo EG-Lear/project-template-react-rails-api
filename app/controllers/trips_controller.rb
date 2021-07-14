@@ -4,22 +4,34 @@ class TripsController < ApplicationController
 
   def show
     # byebug
-    trip = User.find(session[:user_id]).trips.find(params[:id])
+    trip = find_user.trips.find(params[:id])
     render json: trip
   end
   
   def index
     # byebug
-    trips = User.find(session[:user_id]).trips
+    trips = find_user.trips
     render json: trips
   end
 
   def create
     trip = Trip.create(trip_params)
-    render json: trip
+    trips = find_user.trips
+    render json: trips
+  end
+
+  def destroy
+    trip = Trip.find(params[:id])
+    trip.destroy
+    trips = find_user.trips
+    render json: trips
   end
 
   private
+
+  def find_user
+    User.find(session[:user_id])
+  end
 
   def trip_params
     defaults = { user_id: session[:user_id] }

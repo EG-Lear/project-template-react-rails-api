@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 const SingleTrip = () => {
   const [trip, setTrip] = useState([])
@@ -110,6 +110,7 @@ const SingleTrip = () => {
 
   return(
     <div>
+      <Link to='/trips'>Back to Trips</Link>
       <h2>{trip.name}</h2>
       <ul>
         {handleRender()}

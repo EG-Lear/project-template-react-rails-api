@@ -15,9 +15,18 @@ const Trip = () => {
     // console.log(trips)
     const tripLis = []
     trips.forEach(trip => {
-      tripLis.push(<li key={trip.id} id={trip.id} className='Centered'>{trip.name} <Link to={`/trips/${trip.id}`}>View Trip</Link></li>)
+      tripLis.push(
+        <li key={trip.id} id={trip.id} className='Centered'>{trip.name} - <Link to={`/trips/${trip.id}`}>View Trip</Link> - <button value={trip.id} onClick={handleDelete}>Delete Trip</button></li>)
     })
     return(tripLis)
+  }
+
+  const handleDelete = (event) => {
+    fetch(`/trips/${event.target.value}`, {
+      method: 'DELETE'
+    })
+    .then(res => res.json())
+    .then(data => setTrips(data))
   }
 
   const handleSubmit = (event) => {

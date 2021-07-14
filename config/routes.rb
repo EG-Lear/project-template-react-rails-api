@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :trips, only: [:show, :index, :create] do
+  resources :trips, only: [:show, :index, :create, :destroy] do
     resources :stops, only: [:index]
   end
   resources :stops, only: [:create, :destroy]
