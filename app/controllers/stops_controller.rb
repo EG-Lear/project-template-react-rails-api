@@ -28,11 +28,11 @@ class StopsController < ApplicationController
   end
 
   def update
-    # byebug
-    if Stop.find_by(name: params[:name]).nil?
+    stop = find_trip.stops.find_by(name: params[:name])
+    if stop.nil?
       render json: { errors: "stop not found"}
     else
-      Stop.find_by(name: params[:name]).update(stop_params)
+      stop.update(stop_params)
       trip = find_trip
       render json: trip, include: :stops
     end

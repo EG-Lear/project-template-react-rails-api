@@ -73,6 +73,7 @@ const Recommendations = ({admin}) => {
   
   const renderRecommendations = () => {
     const lis = []
+    let counter = 0
     recommendations.forEach(reco => {
       lis.push(
         <li key={reco.id} className='Centered'>
@@ -80,7 +81,7 @@ const Recommendations = ({admin}) => {
           <p>{reco.description}</p>
           <img className='RecoPics' src={reco.image_url}/>
           <br/>
-          <button value={reco.id} onClick={handleClick}>Add to Trip</button>
+          <button value={counter} onClick={handleClick}>Add to Trip</button>
           <select onChange={handleSelect}>
             <option key={'none'} id={"none"} value={"none"}>Select a Trip</option>
             {renderOptions()}
@@ -91,6 +92,7 @@ const Recommendations = ({admin}) => {
           <br/>
         </li>
       )
+      counter ++
     })
     return(lis)
   }
@@ -98,8 +100,8 @@ const Recommendations = ({admin}) => {
   const handleClick = (event) => {
     console.log(selectId)
     console.log(event.target)
-    const nameSet = recommendations[event.target.value - 1].name
-    const descripSet = recommendations[event.target.value - 1].description  
+    const nameSet = recommendations[event.target.value].name
+    const descripSet = recommendations[event.target.value].description  
     fetch('/stops',{
       method: 'POST',
       headers: {
@@ -116,15 +118,25 @@ const Recommendations = ({admin}) => {
   }
 
   const handleSelect = (event) => {
-    const nameSet = trips[event.target.value - 1].name
-    setSelected(nameSet)
     // console.log(event.target)
-    setSelectId(event.target.value)
+    if (event.target.value === "none") {
+      setSelected("none")
+      setSelectId("none")
+    } else {
+      const nameSet = trips[event.target.value].name
+      const selSet = trips[event.target.value].id
+      setSelected(nameSet)
+      setSelectId(selSet)
+    }
   }
   
   const renderOptions = () => {
     const choices = []
-    trips.forEach(trip => choices.push(<option key={trip.id} value={trip.id}>{trip.name}</option>))
+    let count = 0
+    trips.forEach(trip => {
+      choices.push(<option key={trip.id} value={count}>{trip.name}</option>)
+      count ++
+    })
     return(choices)
   }
 
