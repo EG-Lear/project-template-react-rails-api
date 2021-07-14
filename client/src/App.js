@@ -11,6 +11,7 @@ import Recommendations from './Containers/Recommendations'
 function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
+  const [admin, setAdmin] = useState(false)
   
   const history = useHistory()
   
@@ -53,7 +54,7 @@ function App() {
         <Route exact path='/signup' render={() => <Signup loginUser={loginUser}/>}/>
         <Route exact path='/trips' render={() => <Trip />}/>
         <Route exact path='/trips/:id' render={() => <SingleTrip />} />
-        <Route exact path='/recommendations' render={() => <Recommendations />}/>
+        <Route exact path='/recommendations' render={() => <Recommendations admin={admin}/>}/>
       </Switch>
     </div>
   )
