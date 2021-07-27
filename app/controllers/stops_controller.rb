@@ -10,13 +10,17 @@ class StopsController < ApplicationController
   
   def create
     # byebug
-    stop = Stop.create(stop_params)
-    trip = find_trip
-    # stops = Trip.find(stop_params[:trip_id]).stops
-    if stop.valid?
-      render json: trip, status: :created
+    if correct_user
+      stop = Stop.create(stop_params)
+      trip = find_trip
+      # stops = Trip.find(stop_params[:trip_id]).stops
+      if stop.valid?
+        render json: trip, status: :created
+      else
+        render json: { errors: stop.errors.full_messages }, status: :unprocessable_entity
+      end
     else
-      render json: { errors: stop.errors.full_messages }, status: :unprocessable_entity
+      render json: { errors: "Unauthorized" }
     end
   end
 
@@ -28,13 +32,17 @@ class StopsController < ApplicationController
   end
 
   def update
-    stop = find_trip.stops.find_by(name: params[:name])
-    if stop.nil?
-      render json: { errors: "stop not found"}
+    if correct_user
+      stop = find_trip.stops.find_by(name: params[:name])
+      if stop.nil?
+        render json: { errors: "stop not found"}
+      else
+        stop.update(stop_params)
+        trip = find_trip
+        render json: trip, include: :stops
+      end
     else
-      stop.update(stop_params)
-      trip = find_trip
-      render json: trip, include: :stops
+      render json: { errors: "Unauthorized" }
     end
   end
 
@@ -42,6 +50,10 @@ class StopsController < ApplicationController
 
   def find_trip
     Trip.find(params[:trip_id])
+  end
+  
+  def correct_user
+    find_trip[:user_id] == session[:user_id]
   end
 
   def stop_params

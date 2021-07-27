@@ -2,8 +2,7 @@
 
 ## Description
 
-This project is scaffolded so that you can build a React frontend and Rails
-backend together, and easily deploy them to Heroku.
+This is a simple tool for planning trips around the world or in your own neighborhood.  It allows you to plan multiple trips and add some recommended stops to those trips.
 
 ## Requirements
 
@@ -15,7 +14,7 @@ backend together, and easily deploy them to Heroku.
 See Environment Setup below for instructions on installing these tools if you
 don't already have them.
 
-## Setup
+## Installation
 
 **Fork and clone this repository**.
 
@@ -24,6 +23,8 @@ Then run:
 ```sh
 bundle install
 rails db:create
+rails db:migrate
+rails db:seed
 npm install --prefix client
 ```
 
@@ -93,7 +94,7 @@ You can view your deployed app with:
 heroku open
 ```
 
-## Environment Setup
+<!-- ## Environment Setup -->
 
 ### Install the Latest Ruby Version
 
@@ -291,3 +292,30 @@ For additional support, check out these guides on Heroku:
 [postgres downloads page]: https://postgresapp.com/downloads.html
 [heroku rails deploying guide]: https://devcenter.heroku.com/articles/getting-started-with-rails6
 [troubleshooting guide on heroku]: https://devcenter.heroku.com/articles/getting-started-with-rails6#troubleshooting
+
+
+## Usage 
+
+A User must first be created in order to use a standard user.  The code comes with some basic recommendations seeded.  The code also comes with a Amin account that can be used to add new recommendations which is done under the recommendations path.
+
+## Lisence
+
+[MIT](https://choosealicense.com/licenses/mit/)
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
